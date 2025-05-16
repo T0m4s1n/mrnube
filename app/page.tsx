@@ -1,103 +1,130 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { GraduationCap, BookOpen } from "lucide-react";
+import { useState } from "react";
+
+export default function ModeSelector() {
+  const [hoveredMode, setHoveredMode] = useState<'profesor' | 'estudiante' | null>(null);
+  
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="h-screen w-screen flex flex-col md:flex-row font-['Poppins',sans-serif]">
+      {/* Professor Side - White background with black text */}
+      <div 
+        className={`relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center transition-all duration-500 ease-in-out bg-white ${
+          hoveredMode === 'profesor' ? 'md:w-3/5' : hoveredMode === 'estudiante' ? 'md:w-2/5' : 'md:w-1/2'
+        }`}
+        onMouseEnter={() => setHoveredMode('profesor')}
+        onMouseLeave={() => setHoveredMode(null)}
+      >
+        {/* Content */}
+        <div className="relative z-10 p-8 text-center text-black max-w-md">
+          <div className="flex justify-center mb-6">
+            <GraduationCap size={80} className="text-amber-500" />
+          </div>
+          
+          <h2 className="text-4xl font-light uppercase tracking-wide mb-6 font-['Poppins',sans-serif]">Profesor Mode</h2>
+          
+          <div className={`overflow-hidden transition-all duration-500 ${hoveredMode === 'profesor' ? 'max-h-96 opacity-100' : 'max-h-0 md:opacity-0'}`}>
+            <p className="mb-8 text-gray-800">
+              Manage your classroom, create courses, and track student progress with our comprehensive professor tools.
+            </p>
+            
+            <ul className="space-y-3 mb-8 text-left">
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-amber-500 mr-3"></div>
+                <span>Create and manage courses</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-amber-500 mr-3"></div>
+                <span>Track student progress</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-amber-500 mr-3"></div>
+                <span>Grade assignments</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-amber-500 mr-3"></div>
+                <span>Create quizzes and exams</span>
+              </li>
+            </ul>
+          </div>
+          
+          <button 
+            className="mt-4 px-8 py-3 bg-black hover:bg-gray-800 text-white rounded-full transition-all duration-300 uppercase tracking-wider text-sm font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-['Poppins',sans-serif]"
+            onClick={() => window.location.href = '/profesores'}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            Enter as Profesor
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      
+      {/* Student Side - Black background with white text */}
+      <div 
+        className={`relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center transition-all duration-500 ease-in-out bg-black ${
+          hoveredMode === 'estudiante' ? 'md:w-3/5' : hoveredMode === 'profesor' ? 'md:w-2/5' : 'md:w-1/2'
+        }`}
+        onMouseEnter={() => setHoveredMode('estudiante')}
+        onMouseLeave={() => setHoveredMode(null)}
+      >
+        {/* Content */}
+        <div className="relative z-10 p-8 text-center text-white max-w-md">
+          <div className="flex justify-center mb-6">
+            <BookOpen size={80} className="text-blue-300" />
+          </div>
+          
+          <h2 className="text-4xl font-light uppercase tracking-wide mb-6 font-['Poppins',sans-serif]">Estudiante Mode</h2>
+          
+          <div className={`overflow-hidden transition-all duration-500 ${hoveredMode === 'estudiante' ? 'max-h-96 opacity-100' : 'max-h-0 md:opacity-0'}`}>
+            <p className="mb-8 text-gray-300">
+              Access your courses, submit assignments, and track your learning journey all in one place.
+            </p>
+            
+            <ul className="space-y-3 mb-8 text-left">
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-blue-300 mr-3"></div>
+                <span>Access course materials</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-blue-300 mr-3"></div>
+                <span>Submit assignments</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-blue-300 mr-3"></div>
+                <span>Take quizzes and exams</span>
+              </li>
+              <li className="flex items-center">
+                <div className="w-2 h-2 rounded-full bg-blue-300 mr-3"></div>
+                <span>Track your progress</span>
+              </li>
+            </ul>
+          </div>
+          
+          <button 
+            className="mt-4 px-8 py-3 bg-white hover:bg-gray-200 text-black rounded-full transition-all duration-300 uppercase tracking-wider text-sm font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-['Poppins',sans-serif]"
+            onClick={() => window.location.href = '/estudiantes'}
+          >
+            Enter as Estudiante
+          </button>
+        </div>
+      </div>
+      
+      {/* Vertical divider for desktop */}
+      <div className="hidden md:block absolute left-1/2 top-0 h-full transform -translate-x-1/2 z-20 flex flex-col items-center justify-center">
+        <div className="h-full flex flex-col items-center justify-center">
+          <div className="w-px h-1/3 bg-gradient-to-b from-transparent via-gray-400 to-gray-500"></div>
+          
+          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-white to-black flex items-center justify-center border border-gray-400 my-6 shadow-lg">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-blue-300 flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
+                <div className="w-4 h-px bg-gray-800 transform rotate-45"></div>
+                <div className="w-4 h-px bg-gray-800 transform -rotate-45"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="w-px h-1/3 bg-gradient-to-t from-transparent via-gray-400 to-gray-500"></div>
+        </div>
+      </div>
     </div>
   );
 }
